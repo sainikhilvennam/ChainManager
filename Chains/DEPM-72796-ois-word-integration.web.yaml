@@ -1,0 +1,14 @@
+'@infor/bi-react-components':
+  branch: epic/DEPM-72796-word-integration
+  fork:
+    gitlocation: oxford
+    fork: dasa.petrezselyova/bi-react-components
+
+'@infor/bi-react-smart-components':
+  branch: epic/DEPM-72796-word-integration
+  fork:
+    gitlocation: oxford
+    fork: vit.holy/bi-react-smart-components
+
+'@infor/office-integration-web-client': {
+}

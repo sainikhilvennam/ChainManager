@@ -1,0 +1,26 @@
+'@infor/bi-react-components':
+  branch: dev/DEPM-74803-epic-select-element-phase3
+  fork:
+    gitlocation: oxford
+    fork: dasa.petrezselyova/bi-react-components
+
+'@infor/bi-react-components-example':
+  branch: dev/DEPM-74803-epic-select-element-phase3
+  fork:
+    gitlocation: oxford
+    fork: dasa.petrezselyova/bi-react-components-example
+
+'@infor/bi-react-smart-components':
+  branch: dev/DEPM-74803-epic-select-element-phase3
+  fork:
+    gitlocation: oxford
+    fork: vit.holy/bi-react-smart-components
+
+'@infor/bi-cypress-tests-sdk':
+  branch: dev/DEPM-74803-epic-select-element-phase3
+  fork:
+    gitlocation: oxford
+    fork: dasa.petrezselyova/bi-cypress-tests-sdk
+
+'@infor/office-integration-web-client': {}
+'@infor/bi-adhoc-plugin': {}

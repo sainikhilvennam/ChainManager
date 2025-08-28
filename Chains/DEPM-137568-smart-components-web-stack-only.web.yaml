@@ -1,0 +1,23 @@
+'@infor/bi-react-smart-components':
+  branch: dev/DEPM-76941-ois-stage
+  fork:
+    gitlocation: oxford
+    fork: vit.holy/bi-react-smart-components
+
+'@infor/bi-react-smart-components-example':
+  branch: dev/DEPM-76941-ois-stage
+  fork:
+    gitlocation: oxford
+    fork: vit.holy/bi-react-smart-components
+
+'@infor/bi-cypress-tests-sdk':
+  branch: dev/DEPM-76941-ois-stage
+  fork:
+    gitlocation: oxford
+    fork: dasa.petrezselyova/bi-cypress-tests-sdk
+
+'@infor/bi-react-smart-components-tests':
+  branch: dev/DEPM-76941-ois-stage
+  fork:
+    gitlocation: oxford
+    fork: vit.holy/bi-react-smart-components

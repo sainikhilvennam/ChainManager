@@ -1,0 +1,10 @@
+'@infor/bi-dashboards-sdk':
+  branch: dev/DEPM-137976-npm-and-dashboards-development-improvements-ii
+
+'@infor/bi-dashboards-sdk-react':
+  branch: dev/DEPM-137976-npm-and-dashboards-development-improvements-ii
+
+'Dashboards': {}
+
+'@infor/depm-applications-plugin-client': {}
+'@infor/bi-financialconsolidation': {}

@@ -1,0 +1,8 @@
+'@infor/bi-react-smart-components': 
+  branch: dev/DEPM-119290-number-formatting
+  fork:
+    fork: vit.holy/bi-react-smart-components
+    gitlocation: oxford
+
+'@infor/bi-adhoc-plugin': {}
+

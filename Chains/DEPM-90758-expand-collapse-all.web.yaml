@@ -1,0 +1,25 @@
+'@infor/bi-react-components':
+  branch: dev/DEPM-90758-story-expand-collapse-all
+  fork:
+    gitlocation: oxford
+    fork: dasa.petrezselyova/bi-react-components
+
+'@infor/bi-react-components-example':
+  branch: dev/DEPM-90758-story-expand-collapse-all
+  fork:
+    gitlocation: oxford
+    fork: dasa.petrezselyova/bi-react-components-example
+
+'@infor/bi-react-smart-components':
+  branch: dev/DEPM-90758-story-expand-collapse-all
+  fork:
+    gitlocation: oxford
+    fork: vit.holy/bi-react-smart-components
+
+'@infor/bi-dashboards-tests-sdk':
+  branch: dev/DEPM-90758-story-expand-collapse-all
+  fork:
+    gitlocation: oxford
+    fork: dasa.petrezselyova/bi-dashboards-tests-sdk
+
+'@infor/office-integration-web-client': {}

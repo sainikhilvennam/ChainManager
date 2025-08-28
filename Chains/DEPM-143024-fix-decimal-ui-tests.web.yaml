@@ -1,0 +1,8 @@
+'@infor/bi-react-components-advanced':
+  branch: dev/DEPM-143559-toolbar-unification-in-co-screens
+  fork:
+    fork: dasa.petrezselyova/bi-react-components-advanced
+    gitlocation: oxford
+
+'@infor/depm-applications-plugin-client': {}
+'@infor/bi-financialconsolidation': {}

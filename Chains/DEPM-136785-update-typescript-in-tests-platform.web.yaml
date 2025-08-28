@@ -1,0 +1,50 @@
+# Selenium
+'@infor/jest-environment-webdriver':
+  branch: dev/DEPM-136785-update-typescript-and-use-bi-lint-in
+'@infor/jest-jenkins-reporter':
+  branch: dev/DEPM-136785-update-typescript-and-use-bi-lint-in
+# '@infor/jest-nunit-reporter': {}
+'@infor/jest-screenshot-reporter':
+  branch: dev/DEPM-136785-update-typescript-and-use-bi-lint-in
+
+'@infor/bi-dashboards-tests-sdk':
+  branch: dev/DEPM-136785-update-typescript-and-use-bi-lint-in
+  fork:
+    fork: dasa.petrezselyova/bi-dashboards-tests-sdk
+    gitlocation: oxford
+
+'@infor/bi-reporting-ui-tests-cypress': {}
+'@infor/bi-business-modeling-ui-tests': {}
+'@infor/bi-database-modeling-ui-tests': {}
+'@infor/bi-financial-consolidation-ui-tests': {}
+'@infor/bi-dashboards-ui-tests-cypress': {}
+'@infor/depm-applications-ui-tests': {}
+'@infor/office-plus-ng-ui-tests': {}
+
+# weirdo
+# '@infor/office-integration-end-to-end-test': {}
+
+# Cypress
+'@infor/bi-cypress-tests-sdk':
+  branch: dev/DEPM-136785-update-typescript-and-use-bi-lint-in
+  fork:
+    fork: dasa.petrezselyova/bi-cypress-tests-sdk
+    gitlocation: oxford
+
+'@infor/bi-react-components-example':
+  branch: dev/DEPM-136785-update-typescript-and-use-bi-lint-in
+  fork:
+    fork: dasa.petrezselyova/bi-react-components-example
+    gitlocation: oxford
+
+'@infor/bi-react-components-cypress':
+  branch: dev/DEPM-136785-update-typescript-and-use-bi-lint-in
+  fork:
+    fork: dasa.petrezselyova/bi-react-components-example
+    gitlocation: oxford
+
+'@infor/business-modeling-cypress-tests': {}
+'@infor/database-modeling-cypress-tests': {}
+'@infor/bi-adhoc-plugin-tests': {}
+'@infor/bi-financial-consolidation-cypress-tests': {}
+'@infor/office-cypress-tests': {}

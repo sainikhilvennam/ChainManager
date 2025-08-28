@@ -1,0 +1,7 @@
+'@infor/bi-adhoc-plugin-tests': {}
+
+'@infor/bi-cypress-tests-sdk':
+  branch: dev/DEPM-134131-cypress-interceptor
+  fork:
+    gitlocation: oxford
+    fork: dasa.petrezselyova/bi-cypress-tests-sdk

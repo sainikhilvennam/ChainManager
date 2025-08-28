@@ -1,0 +1,50 @@
+#'@infor/tslint-rules': {}
+#'@infor/bi-common': {}
+'@infor/bi-cypress-tests-sdk':
+  branch: dev/stage
+  fork:
+    fork: dasa.petrezselyova/bi-cypress-tests-sdk
+    gitlocation: oxford
+
+'@infor/bi-dashboards-tests-sdk':
+  branch: dev/stage
+  fork:
+    fork: dasa.petrezselyova/bi-dashboards-tests-sdk
+    gitlocation: oxford
+ 
+'@infor/bi-react-components':
+  branch: dev/DEPM-98344-AdvancedDataGrid-autosize-column-prototype
+  fork:
+    fork: dasa.petrezselyova/bi-react-components
+    gitlocation: oxford
+
+'@infor/charts':
+  branch: master
+  
+'@infor/bi-react-smart-components': 
+  branch: dev/DEPM-76129-react-components-update-in-dashboards
+  fork:
+    fork: vit.holy/bi-react-smart-components
+    gitlocation: oxford
+
+'@infor/bi-react-components-example':
+  branch: dev/stage
+  fork:
+    fork: dasa.petrezselyova/bi-react-components-example
+    gitlocation: oxford
+
+'@infor/bi-dashboards-sdk': {}
+'@infor/bi-dashboards-sdk-react': {}
+#'@infor/bi-dashboards-client': {}
+
+'@infor/bi-react-components-cypress': {}
+
+Dashboards:
+  title: WebFramework
+'@infor/bi-administration-plugin-client': {}
+
+Modeling: {}
+'@infor/depm-applications-plugin-client': {}
+'@infor/bi-financialconsolidation': {}
+
+'@infor/bi-adhoc-plugin': {}

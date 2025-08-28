@@ -1,0 +1,17 @@
+'@infor/bi-react-components':
+  branch: dev/DEPM-156024-bugs
+  fork:
+    gitlocation: oxford
+    fork: dasa.petrezselyova/bi-react-components
+
+Dashboards:
+  title: WebFramework
+
+'@infor/bi-adhoc-plugin': {}
+'@infor/bi-adhoc-plugin-tests': {}
+
+'@infor/bi-cypress-tests-sdk':
+  branch: dev/DEPM-156024-bugs
+  fork:
+    gitlocation: oxford
+    fork: dasa.petrezselyova/bi-cypress-tests-sdk

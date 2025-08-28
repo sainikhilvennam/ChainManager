@@ -1,0 +1,45 @@
+'@infor/bi-adhoc-tools': {}
+#'@infor/bi-charts':
+#  branch: dev/DEPM-136135-tmp-build-fix
+'@infor/bi-common': {}
+'@infor/bi-react-components': {}
+'@infor/bi-react-smart-components': {}
+'@infor/charts': {}
+'@infor/extts': {}
+'@infor/bi-sencha': {}
+'@infor/bi-dashboards-sdk': {}
+'@infor/bi-dashboards-sdk-react': {}
+'@infor/bi-react-components-advanced': {}
+'@infor/bi-dashboards-client': {}
+'@infor/bi-webextension-sdk': {}
+'infor.bi.widgets': {}
+'Dashboards': {}
+'@infor/depm-navigation-plugin': {}
+'@infor/bi-financialconsolidation': {}
+'@infor/depm-applications-plugin-client': {}
+'@infor/bi-administration-plugin': {}
+'@infor/bi-administration-plugin-client': {}
+'Application Studio': {}
+'@infor/visualization-printing-client': {}
+'@infor/bi-adhoc-plugin': {}
+'Modeling': {}
+'@infor/office-integration-web-client': {}
+'@infor/office-integration-custom-excel-formulas': {}
+'@infor/office-integration-deployment': {}
+# 'webextension-context-panel': {}
+# 'webextension-data-grid': {}
+# 'webextension-date-picker': {}
+# 'webextension-dropdown': {}
+# 'webextension-header-filter-field': {}
+# 'webextension-item-list': {}
+# 'webextension-modal-buttons-react': {}
+# 'webextension-notification-banner': {}
+# 'webextension-paging-panel-so-ho-xi': {}
+# 'webextension-radio-buttons-react': {}
+# 'webextension-repository-image-viewer': {}
+# 'webextension-rich-text-editor': {}
+# 'webextension-simple-input': {}
+# 'webextension-tab-control': {}
+# 'webextension-tab-control-react': {}
+# 'webextension-toolbar-react': {}
+# 'webextension-wizard-control-react': {}

@@ -1,0 +1,8 @@
+'@infor/bi-cypress-tests-sdk':
+  branch: dev/DEPM-155848-relational-modeling-UI-tests
+  fork:
+    fork: dasa.petrezselyova/bi-cypress-tests-sdk
+    gitlocation: oxford
+
+# projects for links
+'@infor/database-modeling-cypress-tests': {}

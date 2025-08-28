@@ -1,0 +1,6 @@
+'@infor/bi-react-components-advanced': { 
+    fork:  mmabato/bi-react-components-advanced,
+    branch: master
+}
+
+'@infor/depm-applications-plugin-client': {}

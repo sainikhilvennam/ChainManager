@@ -1,0 +1,117 @@
+<Window x:Class="ChainManager.Desktop.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:ChainManager.Desktop.ViewModels"
+        Title="Chain Manager" Height="600" Width="900"
+        WindowStartupLocation="CenterScreen">
+    
+    <Window.DataContext>
+        <vm:MainViewModel />
+    </Window.DataContext>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Toolbar -->
+        <ToolBar Grid.Row="0" ToolBarTray.IsLocked="True">
+            <Button Content="Load Chain" Command="{Binding LoadChainCommand}"/>
+            <Button Content="Validate" Command="{Binding ValidateChainCommand}"/>
+            <Button Content="Create Feature" Command="{Binding CreateFeatureCommand}"/>
+            <Button Content="Rebase" Command="{Binding RebaseChainCommand}"/>
+            <Button Content="Save" Command="{Binding SaveChainCommand}"/>
+
+        </ToolBar>
+        
+        <!-- Main Content -->
+        <Grid Grid.Row="1" Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <!-- Chain Info Panel -->
+            <GroupBox Grid.Column="0" Header="Chain Information">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel Margin="10">
+                        <TextBlock Text="JIRA ID:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding CurrentChain.JiraId}" Margin="0,0,0,10"/>
+                        
+                        <TextBlock Text="Global Version:" FontWeight="Bold"/>
+                        <TextBox Text="{Binding CurrentChain.GlobalVersion, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,5"/>
+                        
+                        <TextBlock Text="Global Devs Version:" FontWeight="Bold"/>
+                        <TextBox Text="{Binding CurrentChain.GlobalDevsVersion, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,10"/>
+                        
+                        <TextBlock Text="File Path:" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding CurrentChain.FilePath}" TextWrapping="Wrap" Margin="0,0,0,15"/>
+                        
+                        <Separator Margin="0,5"/>
+                        
+                        <TextBlock Text="Configuration Summary:" FontWeight="Bold" Margin="0,5,0,5"/>
+                        <TextBlock Text="{Binding ConfigurationSummary}" TextWrapping="Wrap" FontSize="11" Foreground="DarkBlue"/>
+                    </StackPanel>
+                </ScrollViewer>
+            </GroupBox>
+            
+            <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch"/>
+            
+            <!-- Projects Panel -->
+            <GroupBox Grid.Column="2" Header="Projects">
+                <DataGrid ItemsSource="{Binding Projects}" 
+                          AutoGenerateColumns="False"
+                          CanUserAddRows="False"
+                          GridLinesVisibility="Horizontal"
+                          HeadersVisibility="Column"
+                          AlternatingRowBackground="LightGray">
+                    <DataGrid.Columns>
+                        <DataGridCheckBoxColumn Header="Active" Binding="{Binding IsSelected}" Width="60"/>
+                        <DataGridTextColumn Header="Project" Binding="{Binding ProjectName}" IsReadOnly="True" Width="120"/>
+                        <DataGridTemplateColumn Header="Mode" Width="100">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ComboBox ItemsSource="{Binding DataContext.AvailableModes, RelativeSource={RelativeSource AncestorType=Window}}"
+                                             SelectedItem="{Binding Mode, UpdateSourceTrigger=PropertyChanged}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Fork" Width="180">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ComboBox ItemsSource="{Binding DataContext.AvailableForks, RelativeSource={RelativeSource AncestorType=Window}}"
+                                             SelectedItem="{Binding Fork, UpdateSourceTrigger=PropertyChanged}"
+                                             IsEditable="True"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Branch" Width="180">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ComboBox ItemsSource="{Binding DataContext.AvailableBranches, RelativeSource={RelativeSource AncestorType=Window}}"
+                                             SelectedItem="{Binding Branch, UpdateSourceTrigger=PropertyChanged}"
+                                             IsEditable="True"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridCheckBoxColumn Header="Tests" Binding="{Binding TestsUnit}" Width="60"/>
+                        <DataGridTextColumn Header="Status" Binding="{Binding StatusInfo}" IsReadOnly="True" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </GroupBox>
+        </Grid>
+        
+        <!-- Status Bar -->
+        <StatusBar Grid.Row="2">
+            <StatusBarItem>
+                <TextBlock Text="{Binding StatusMessage}"/>
+            </StatusBarItem>
+            <StatusBarItem HorizontalAlignment="Right">
+                <TextBlock Text="{Binding AnalysisInfo}" FontStyle="Italic"/>
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+</Window>

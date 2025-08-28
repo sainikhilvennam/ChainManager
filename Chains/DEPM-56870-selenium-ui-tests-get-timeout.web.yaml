@@ -1,0 +1,52 @@
+# --> '@infor/redux-observable': {}
+#'@infor/sencha-cmd': {}
+#'@infor/tslint-rules': {}
+# '@infor/jest-nunit-reporter': {}
+#'@infor/jest-environment-webdriver': {}
+#'@infor/jest-screenshot-reporter': {}
+#'@infor/screenshot-report-viewer': {}
+#'@infor/bi-dashboards-tests-sdk': {
+#  branch: chromedriverupdate
+#}
+# --> '@infor/bi-charts': {}
+#'@infor/bi-common': {}
+#'@infor/bi-react-components': {}
+# --> '@infor/bi-react-smart-components': {}
+#'@infor/charts': {}
+'@infor/bi-react-components-example': {
+  branch: chromedriverupdate
+}
+#'@infor/extts': {}
+#'@infor/bi-sencha': {}
+#'@infor/bi-dashboards-sdk': {}
+#'@infor/bi-dashboards-sdk-react': {}
+#'@infor/bi-react-components-advanced': {}
+#'@infor/bi-dashboards-client': {}
+#'@infor/bi-webextension-sdk': {}
+#InforHomepagesWidgetSDKSamples:
+#  title: Homepages widget SDK
+#  branch: homepages-sdk
+#infor.bi.widgets:
+#  title: Homepages widget
+#Dashboards:
+#  title: WebFramework
+#'@infor/bi-dashboards-ui-tests':
+#  title: WebFramework UI tests
+#'@infor/depm-navigation-plugin': {}
+#'@infor/bi-financialconsolidation': {}
+#'@infor/depm-applications-plugin-client': {}
+#'@infor/depm-applications-ui-tests':
+#  title: d/EPM Service tests
+#'@infor/bi-administration-plugin': {}
+#'@infor/bi-administration-plugin-client': {}
+#Application Studio: {}
+#'@infor/bi-reporting-ui-tests':
+#  title: Application Studio UI tests
+#Modeling: {}
+#'@infor/bi-database-modeling-ui-tests':
+#  title: Database Modeling UI tests
+#'@infor/bi-business-modeling-ui-tests':
+#  title: Business Modeling UI tests
+#'@infor/office-integration-web-client': {}
+#'@infor/office-plus-ng-ui-tests':
+#  title: Office UI tests

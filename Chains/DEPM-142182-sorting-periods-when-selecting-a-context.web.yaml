@@ -1,0 +1,12 @@
+'@infor/bi-react-components-advanced':
+  branch: dev/DEPM-143238-epm-applications-features-for-12.24.11
+  fork:
+    fork: dasa.petrezselyova/bi-react-components-advanced
+    gitlocation: oxford
+
+Dashboards:
+  title: WebFramework
+'@infor/bi-administration-plugin-client': {}
+Modeling: {}
+'@infor/depm-applications-plugin-client': {}
+'@infor/bi-financialconsolidation': {}

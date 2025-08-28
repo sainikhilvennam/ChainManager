@@ -1,0 +1,21 @@
+'@infor/bi-react-components':
+  branch: dev/DEPM-156402-numberfield-scientific-numbers-are-not-recognized
+  fork:
+    fork: dasa.petrezselyova/bi-react-components
+    gitlocation: oxford
+
+'@infor/bi-react-components-example':
+  branch: dev/DEPM-156402-numberfield-scientific-numbers-are-not-recognized
+  fork:
+    fork: dasa.petrezselyova/bi-react-components-example
+    gitlocation: oxford
+
+# projects for links
+Dashboards:
+  title: WebFramework
+'@infor/bi-administration-plugin-client': {}
+Modeling: {}
+'@infor/depm-applications-plugin-client': {}
+'@infor/bi-financialconsolidation': {}
+'@infor/bi-adhoc-plugin': {}
+'@infor/office-integration-web-client': {}

@@ -1,0 +1,20 @@
+'@infor/bi-react-smart-components':
+  branch: dev/DEPM-76119-sync-with-adhoc-designer
+  fork:
+    gitlocation: oxford
+    fork: vit.holy/bi-react-smart-components
+
+'@infor/bi-cypress-tests-sdk':
+  branch: dev/DEPM-76119-sync-with-adhoc-designer
+  fork:
+    gitlocation: oxford
+    fork: dasa.petrezselyova/bi-cypress-tests-sdk
+
+Dashboards:
+  title: WebFramework
+'@infor/bi-adhoc-plugin': {}
+'@infor/bi-adhoc-plugin-tests': {}
+'@infor/office-integration-web-client': {}
+'@infor/office-integration-custom-excel-formulas': {}
+'@infor/office-cypress-tests': {}
+

@@ -1,0 +1,23 @@
+#'@infor/tslint-rules': {}
+#'@infor/bi-common': {}
+#'@infor/bi-dashboards-tests-sdk':
+#  branch: master
+#  fork: dpetrezselyova/webframework-tests-sdk
+'@infor/bi-react-components':
+  branch: feature/DEPM-28143-get-rid-of-custom-styling-and
+  fork: dpetrezselyova/bi-react-components
+#'@infor/charts':
+#  branch: master
+#  fork: dpetrezselyova/charts
+'@infor/bi-react-components-example':
+  branch: feature/DEPM-28143-get-rid-of-custom-styling-and
+  fork: dpetrezselyova/bi-react-components-example
+# '@infor/bi-dashboards-sdk-react': {}
+# '@infor/bi-dashboards-client': {}
+Dashboards:
+  title: WebFramework
+'@infor/bi-administration-plugin-client': {}
+Modeling: {}
+'@infor/depm-applications-plugin-client': {}
+'@infor/bi-financialconsolidation': {}
+

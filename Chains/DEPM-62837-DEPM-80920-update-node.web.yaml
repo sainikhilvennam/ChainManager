@@ -1,0 +1,55 @@
+#'@infor/redux-observable': {}
+#'@infor/sencha-cmd': {}
+#'@infor/tslint-rules': {}
+#'@infor/jest-nunit-reporter': {}
+#'@infor/jest-environment-webdriver': {}
+#'@infor/jest-screenshot-reporter': {}
+#'@infor/screenshot-report-viewer': {}
+#'@infor/bi-dashboards-tests-sdk': {}
+#'@infor/bi-charts': {}
+'@infor/bi-common':
+  branch: dev/DEPM-62837-DEPM-80920-update-node
+  fork: dpetrezselyova/biframework.js
+'@infor/bi-react-components':
+  branch: dev/DEPM-62837-DEPM-80920-update-node
+  fork: dpetrezselyova/bi-react-components
+'@infor/charts':
+  branch: dev/DEPM-62837-DEPM-80920-update-node
+  fork: dpetrezselyova/charts
+'@infor/bi-react-components-example':
+  branch: epic/DEPM-80920-build-dependencies
+  fork: dpetrezselyova/bi-react-components-example
+'@infor/bi-react-smart-components': {}
+#'@infor/extts': {}
+#'@infor/bi-sencha': {}
+#'@infor/bi-dashboards-sdk': {}
+'@infor/bi-dashboards-sdk-react':
+  branch: dev/DEPM-62837-DEPM-80920-update-node
+  fork: dpetrezselyova/webframework-react-plugin-sdk
+'@infor/bi-react-components-advanced':
+  branch: dev/DEPM-62837-DEPM-80920-update-node
+  fork: dpetrezselyova/bi-react-components-advanced
+#'@infor/bi-dashboards-client': {}
+'@infor/bi-webextension-sdk':
+  branch: epic/DEPM-80920-build-dependencies
+  fork: dpetrezselyova/webextensiontypings
+#infor.bi.widgets:
+#  title: Homepages widget
+Dashboards:
+  title: WebFramework
+#'@infor/bi-dashboards-ui-tests': {}
+#  title: WebFramework UI tests
+#'@infor/depm-navigation-plugin': {}
+'@infor/bi-financialconsolidation': {}
+'@infor/depm-applications-plugin-client': {}
+#'@infor/bi-administration-plugin': {}
+'@infor/bi-administration-plugin-client': {}
+#Application Studio: {}
+#'@infor/bi-reporting-ui-tests':
+#  title: Application Studio UI tests
+Modeling: {}
+'@infor/bi-business-modeling-ui-tests': {}
+'@infor/bi-database-modeling-ui-tests': {}
+'@infor/office-integration-web-client': {}
+#'@infor/office-plus-ng-ui-tests':
+#  title: Office UI tests

@@ -1,0 +1,30 @@
+'@infor/bi-cypress-tests-sdk':
+  branch: dev/DEPM-140908-warnings-and-errors
+  fork:
+    gitlocation: oxford
+    fork: dasa.petrezselyova/bi-cypress-tests-sdk
+
+'@infor/bi-react-components':
+  branch: dev/DEPM-140908-warnings-and-errors
+  fork:
+    gitlocation: oxford
+    fork: dasa.petrezselyova/bi-react-components
+
+'@infor/bi-react-components-example':
+  branch: dev/DEPM-140908-warnings-and-errors
+  fork:
+    gitlocation: oxford
+    fork: dasa.petrezselyova/bi-react-components-example
+    
+'@infor/bi-react-smart-components': 
+  branch: dev/DEPM-140908-warnings-and-errors
+  fork:
+    fork: vit.holy/bi-react-smart-components
+    gitlocation: oxford
+
+Dashboards:
+  title: WebFramework
+
+'@infor/bi-adhoc-plugin': {}
+'@infor/bi-adhoc-plugin-tests': {}
+'@infor/office-integration-web-client': {}

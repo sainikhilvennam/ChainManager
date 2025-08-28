@@ -1,0 +1,11 @@
+
+'@infor/bi-react-components-advanced': { 
+    fork:  mmabato/bi-react-components-advanced,
+    branch: dev/DEPM-40932-filter-for-id-and-name-in-lookup
+}
+Dashboards:
+  title: WebFramework
+'@infor/bi-administration-plugin-client': {}
+Modeling: {}
+'@infor/depm-applications-plugin-client': {}
+'@infor/bi-financialconsolidation': {}

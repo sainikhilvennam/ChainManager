@@ -1,0 +1,31 @@
+# '@infor/bi-cypress-tests-sdk':
+#   branch: dev/DEPM-11474-epic-automatic-tests-improvements
+#   fork:
+#     gitlocation: oxford
+#     fork: dasa.petrezselyova/bi-cypress-tests-sdk
+
+# '@infor/bi-react-components':
+#   branch: dev/DEPM-11474-epic-automatic-tests-improvements
+#   fork:
+#     gitlocation: oxford
+#     fork: dasa.petrezselyova/bi-react-components
+
+'@infor/bi-react-smart-components':
+  branch: dev/DEPM-11474-vitek-automatic-tests-improvements
+  fork:
+    gitlocation: oxford
+    fork: vit.holy/bi-react-smart-components
+
+'@infor/bi-react-smart-components-example':
+  branch: dev/DEPM-11474-vitek-automatic-tests-improvements
+  fork:
+    gitlocation: oxford
+    fork: vit.holy/bi-react-smart-components
+
+'@infor/bi-react-smart-components-tests':
+  branch: dev/DEPM-11474-vitek-automatic-tests-improvements
+  fork:
+    gitlocation: oxford
+    fork: vit.holy/bi-react-smart-components
+
+'@infor/office-integration-web-client': {}

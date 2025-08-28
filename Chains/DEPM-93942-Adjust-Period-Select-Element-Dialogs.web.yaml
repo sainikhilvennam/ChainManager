@@ -1,0 +1,13 @@
+'@infor/bi-react-components-advanced':
+  branch: dev/DEPM-94077-BIRCa-Lookup-Content-and-Form-Field-Element-Dialog-Hierarchical
+  fork:
+    fork: dasa.petrezselyova/bi-react-components-advanced
+    gitlocation: oxford
+
+Dashboards:
+  title: WebFramework
+'@infor/bi-administration-plugin-client': {}
+Modeling: {}
+'@infor/depm-applications-plugin-client': {}
+'@infor/bi-financialconsolidation': {}
+

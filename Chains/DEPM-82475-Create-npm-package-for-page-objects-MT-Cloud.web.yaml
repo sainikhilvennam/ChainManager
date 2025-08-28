@@ -1,0 +1,6 @@
+'@infor/bi-cypress-tests-sdk':
+  branch: dev/DEPM-82475-Create-npm-package-for-page-objects-MT-Cloud
+  fork:
+    fork: dasa.petrezselyova/bi-cypress-tests-sdk
+    gitlocation: oxford
+depmcloudsuites: {}

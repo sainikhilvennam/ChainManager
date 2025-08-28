@@ -1,0 +1,87 @@
+'@infor/bi-cypress-tests-sdk':
+  branch: dev/DEPM-162134-adopt-IDS-web-components-in-EPM-II
+  fork:
+    fork: dasa.petrezselyova/bi-cypress-tests-sdk
+    gitlocation: oxford
+
+'@infor/bi-dashboards-tests-sdk':
+  branch: dev/DEPM-140059-adopt-IDS-web-components-in-EPM
+  fork:
+    fork: dasa.petrezselyova/bi-dashboards-tests-sdk
+    gitlocation: oxford
+
+'@infor/bi-react-components':
+  branch: dev/DEPM-162134-adopt-IDS-web-components-in-EPM-II
+  fork:
+    fork: dasa.petrezselyova/bi-react-components
+    gitlocation: oxford
+
+#'@infor/charts':
+#  branch: dev/stage
+
+'@infor/bi-react-components-example':
+  branch: dev/DEPM-162134-adopt-IDS-web-components-in-EPM-II
+  fork:
+    fork: dasa.petrezselyova/bi-react-components-example
+    gitlocation: oxford
+
+'@infor/bi-react-smart-components': 
+  branch: dev/DEPM-140059-adopt-IDS-web-components-in-EPM
+  fork:
+    fork: vit.holy/bi-react-smart-components
+    gitlocation: oxford
+
+'@infor/bi-react-smart-components-example':
+  branch: dev/DEPM-140059-adopt-IDS-web-components-in-EPM
+  fork:
+    gitlocation: oxford
+    fork: vit.holy/bi-react-smart-components
+
+'@infor/bi-react-smart-components-tests':
+  branch: dev/DEPM-140059-adopt-IDS-web-components-in-EPM
+  fork:
+    gitlocation: oxford
+    fork: vit.holy/bi-react-smart-components
+
+'@infor/bi-dashboards-sdk':
+  branch: dev/stage
+
+'@infor/bi-dashboards-sdk-react':
+  branch: dev/stage
+  
+'@infor/bi-react-components-advanced':
+  branch: dev/DEPM-140059-adopt-IDS-web-components-in-EPM
+  fork:
+    fork: dasa.petrezselyova/bi-react-components-advanced
+    gitlocation: oxford
+
+# projects for links
+'@infor/bi-react-components-cypress': {}
+Dashboards:
+  title: WebFramework
+'@infor/bi-financialconsolidation': {}
+'@infor/depm-applications-plugin-client': {}
+'@infor/bi-administration-plugin-client': {}
+Application Studio: {}
+'@infor/bi-adhoc-plugin': {}
+'@infor/office-integration-web-client': {}
+Modeling: {}
+'@infor/bi-dashboards-ui-tests-cypress':
+  title: WebFramework UI tests
+'@infor/bi-financial-consolidation-ui-tests': {}
+'@infor/depm-applications-ui-tests':
+  title: d/EPM Service tests
+'@infor/bi-reporting-ui-tests-cypress':
+  title: Application Studio UI tests
+'@infor/bi-adhoc-plugin-tests': {}
+'@infor/bi-database-modeling-ui-tests':
+  title: Database Modeling UI tests
+'@infor/bi-business-modeling-ui-tests':
+  title: Business Modeling UI tests
+'@infor/business-modeling-cypress-tests': {}
+'@infor/database-modeling-cypress-tests': {}
+'@infor/office-cypress-tests': {}
+'@infor/office-plus-ng-ui-tests':
+  title: Office UI tests
+'@infor/bi-financial-consolidation-cypress-tests': {}
+

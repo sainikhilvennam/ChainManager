@@ -1,0 +1,7 @@
+'@infor/bi-react-smart-components':
+  branch: dev/DEPM-76941-ois-integ
+  fork:
+    gitlocation: oxford
+    fork: vit.holy/bi-react-smart-components
+
+'@infor/office-integration-web-client': {}
