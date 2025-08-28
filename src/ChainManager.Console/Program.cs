@@ -5,24 +5,27 @@ namespace ChainManager.Console;
 
 class Program
 {
-    static void Main(string[] args)
+    static async Task Main(string[] args)
     {
-        var chainService = new ChainConfigurationService();
-        var consoleInterface = new ConsoleInterface(chainService);
-        consoleInterface.Run();
+        var gitService = new ParallelGitService();
+        var chainService = new ChainConfigurationService(gitService);
+        var consoleInterface = new ConsoleInterface(chainService, gitService);
+        await consoleInterface.RunAsync();
     }
 }
 
 public class ConsoleInterface
 {
     private readonly ChainConfigurationService _chainService;
+    private readonly ParallelGitService _gitService;
 
-    public ConsoleInterface(ChainConfigurationService chainService)
+    public ConsoleInterface(ChainConfigurationService chainService, ParallelGitService gitService)
     {
         _chainService = chainService;
+        _gitService = gitService;
     }
 
-    public void Run()
+    public async Task RunAsync()
     {
         System.Console.WriteLine("Chain Manager - Console Mode");
         System.Console.WriteLine("=============================");
@@ -36,12 +39,15 @@ public class ConsoleInterface
             {
                 switch (choice)
                 {
-                    case "1": ValidateChainFile(); break;
-                    case "2": CreateChainForFeature(); break;
-                    case "3": RebaseChain(); break;
-                    case "4": ToggleTests(); break;
-                    case "5": SwitchMode(); break;
-                    case "6": return;
+                    case "1": await CloneRepositories(); break;
+                    case "2": await UpdateRepositories(); break;
+                    case "3": ShowGitData(); break;
+                    case "4": ValidateChainFile(); break;
+                    case "5": CreateChainForFeature(); break;
+                    case "6": RebaseChain(); break;
+                    case "7": ToggleTests(); break;
+                    case "8": SwitchMode(); break;
+                    case "9": return;
                     default: System.Console.WriteLine("Invalid option. Try again."); break;
                 }
             }
@@ -55,13 +61,91 @@ public class ConsoleInterface
     private void ShowMenu()
     {
         System.Console.Clear();
-        System.Console.WriteLine("1. Validate Chain File");
-        System.Console.WriteLine("2. Create Chain for Feature");
-        System.Console.WriteLine("3. Rebase Chain");
-        System.Console.WriteLine("4. Toggle Tests");
-        System.Console.WriteLine("5. Switch Mode");
-        System.Console.WriteLine("6. Exit");
+        System.Console.WriteLine("=== Git Operations ===");
+        System.Console.WriteLine("1. Clone All Repositories");
+        System.Console.WriteLine("2. Update Repositories");
+        System.Console.WriteLine("3. Show Git Data");
+        System.Console.WriteLine();
+        System.Console.WriteLine("=== Chain Operations ===");
+        System.Console.WriteLine("4. Validate Chain File");
+        System.Console.WriteLine("5. Create Chain for Feature");
+        System.Console.WriteLine("6. Rebase Chain");
+        System.Console.WriteLine("7. Toggle Tests");
+        System.Console.WriteLine("8. Switch Mode");
+        System.Console.WriteLine("9. Exit");
         System.Console.Write("\nSelect option: ");
+    }
+
+    private async Task CloneRepositories()
+    {
+        System.Console.WriteLine("Cloning all repositories...");
+        var progress = new Progress<string>(System.Console.WriteLine);
+        
+        try
+        {
+            await _gitService.CloneAllRepositoriesAsync(progress);
+            System.Console.WriteLine("\nAll repositories cloned successfully!");
+        }
+        catch (Exception ex)
+        {
+            System.Console.WriteLine($"Error cloning repositories: {ex.Message}");
+        }
+        
+        System.Console.WriteLine("\nPress any key to continue...");
+        System.Console.ReadKey();
+    }
+
+    private async Task UpdateRepositories()
+    {
+        System.Console.WriteLine("Updating all repositories...");
+        var progress = new Progress<string>(System.Console.WriteLine);
+        
+        try
+        {
+            await _gitService.UpdateAllRepositoriesAsync(progress);
+            System.Console.WriteLine("\nAll repositories updated successfully!");
+        }
+        catch (Exception ex)
+        {
+            System.Console.WriteLine($"Error updating repositories: {ex.Message}");
+        }
+        
+        System.Console.WriteLine("\nPress any key to continue...");
+        System.Console.ReadKey();
+    }
+
+    private void ShowGitData()
+    {
+        try
+        {
+            var projects = _chainService.GetKnownProjects();
+            var forks = _chainService.GetKnownForks();
+            var branches = _chainService.GetKnownBranches();
+            var report = _chainService.GetAnalysisReport();
+            
+            System.Console.WriteLine($"Git Analysis Report:");
+            System.Console.WriteLine($"Projects: {projects.Count}");
+            System.Console.WriteLine($"Forks: {forks.Count}");
+            System.Console.WriteLine($"Branches: {branches.Count}");
+            System.Console.WriteLine();
+            
+            System.Console.WriteLine("Available Projects:");
+            foreach (var project in projects.Take(10))
+                System.Console.WriteLine($"  - {project}");
+            if (projects.Count > 10)
+                System.Console.WriteLine($"  ... and {projects.Count - 10} more");
+            
+            System.Console.WriteLine("\nAvailable Forks:");
+            foreach (var fork in forks)
+                System.Console.WriteLine($"  - {fork}");
+        }
+        catch (Exception ex)
+        {
+            System.Console.WriteLine($"Error getting Git data: {ex.Message}");
+        }
+        
+        System.Console.WriteLine("\nPress any key to continue...");
+        System.Console.ReadKey();
     }
 
     private void ValidateChainFile()

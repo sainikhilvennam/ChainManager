@@ -9,4 +9,10 @@
   <ItemGroup>
     <ProjectReference Include="..\ChainManager.Core\ChainManager.Core.csproj" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <None Include="..\..\repositories.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>

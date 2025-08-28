@@ -8,6 +8,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChainManager.Desktop", "src
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChainManager.Console", "src\ChainManager.Console\ChainManager.Console.csproj", "{E00D5DE0-EA0B-421B-8792-05C5452D99D8}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F1234567-89AB-CDEF-0123-456789ABCDEF}"
+	ProjectSection(SolutionItems) = preProject
+		repositories.json = repositories.json
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

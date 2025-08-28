@@ -4,42 +4,62 @@ namespace ChainManager.Core.Services;
 
 public class ChainFileAnalyzer
 {
-    private const string ChainFilesPath = @"C:\Users\vsainikhil\source\Chains";
+    private readonly ParallelGitService _gitService;
     
     public HashSet<string> ValidProjects { get; private set; } = new();
     public HashSet<string> ValidForks { get; private set; } = new();
     public HashSet<string> ValidBranches { get; private set; } = new();
     public HashSet<string> ValidTags { get; private set; } = new();
     public HashSet<string> ValidModes { get; private set; } = new() { "source", "binary", "ignore", "binary,source", "source,binary" };
+
+    public ChainFileAnalyzer(ParallelGitService gitService)
+    {
+        _gitService = gitService;
+    }
     
     public void AnalyzeAllChainFiles()
     {
-        if (!Directory.Exists(ChainFilesPath))
+        try
         {
-            Console.WriteLine($"Chains directory not found: {ChainFilesPath}");
-            return;
+            var config = _gitService.LoadConfig();
+            
+            // Analyze projects from Git config
+            foreach (var url in config.MainRepositories)
+            {
+                var projectName = _gitService.ExtractProjectName(url);
+                ValidProjects.Add(projectName);
+                
+                // Get branches for this project
+                var branches = _gitService.GetBranches(projectName);
+                foreach (var branch in branches)
+                    ValidBranches.Add(branch);
+            }
+            
+            // Analyze fork repositories
+            foreach (var fork in config.ForkRepositories)
+            {
+                ValidForks.Add(fork.Key);
+                
+                foreach (var url in fork.Value)
+                {
+                    var projectName = _gitService.ExtractProjectName(url);
+                    ValidProjects.Add(projectName);
+                    
+                    var branches = _gitService.GetBranches(projectName, fork.Key);
+                    foreach (var branch in branches)
+                        ValidBranches.Add(branch);
+                }
+            }
+            
+            Console.WriteLine($"Git analysis complete:");
+            Console.WriteLine($"  Projects: {ValidProjects.Count}");
+            Console.WriteLine($"  Forks: {ValidForks.Count}");
+            Console.WriteLine($"  Branches: {ValidBranches.Count}");
         }
-
-        var chainFiles = Directory.GetFiles(ChainFilesPath, "*.properties");
-        Console.WriteLine($"Analyzing {chainFiles.Length} chain files...");
-
-        foreach (var filePath in chainFiles)
+        catch (Exception ex)
         {
-            try
-            {
-                AnalyzeChainFile(filePath);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error analyzing {Path.GetFileName(filePath)}: {ex.Message}");
-            }
+            Console.WriteLine($"Error analyzing Git repositories: {ex.Message}");
         }
-
-        Console.WriteLine($"Analysis complete:");
-        Console.WriteLine($"  Projects: {ValidProjects.Count}");
-        Console.WriteLine($"  Forks: {ValidForks.Count}");
-        Console.WriteLine($"  Branches: {ValidBranches.Count}");
-        Console.WriteLine($"  Tags: {ValidTags.Count}");
     }
 
     private void AnalyzeChainFile(string filePath)

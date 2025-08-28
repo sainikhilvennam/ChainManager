@@ -1,0 +1,82 @@
+{
+  "MainRepositories": [
+    "ssh://git@oxfordssh.awsdev.infor.com:7999/DEPM/Platform/administration.git",
+    "ssh://git@oxfordssh.awsdev.infor.com:7999/DEPM/Platform/appengine.git",
+    "ssh://git@oxfordssh.awsdev.infor.com:7999/DEPM/Platform/appstudio.git",
+    "ssh://git@oxfordssh.awsdev.infor.com:7999/DEPM/Platform/central.git",
+    "ssh://git@oxfordssh.awsdev.infor.com:7999/DEPM/Platform/consolidation.git",
+    "ssh://git@oxfordssh.awsdev.infor.com:7999/DEPM/Platform/content.git",
+    "ssh://git@oxfordssh.awsdev.infor.com:7999/DEPM/Platform/content-backup.git",
+    "ssh://git@oxfordssh.awsdev.infor.com:7999/DEPM/Platform/deployment.git",
+    "ssh://git@oxfordssh.awsdev.infor.com:7999/DEPM/Platform/dashboards.git",
+    "ssh://git@oxfordssh.awsdev.infor.com:7999/DEPM/Platform/depmservice.git",
+    "ssh://git@oxfordssh.awsdev.infor.com:7999/DEPM/Platform/designer.git",
+    "ssh://git@oxfordssh.awsdev.infor.com:7999/DEPM/Platform/framework.git",
+    "ssh://git@oxfordssh.awsdev.infor.com:7999/DEPM/Platform/modeling.git",
+    "ssh://git@oxfordssh.awsdev.infor.com:7999/DEPM/Platform/officeinteg.git",
+    "ssh://git@oxfordssh.awsdev.infor.com:7999/DEPM/Platform/olap.git",
+    "ssh://git@oxfordssh.awsdev.infor.com:7999/DEPM/Platform/olap-backup.git",
+    "ssh://git@oxfordssh.awsdev.infor.com:7999/DEPM/Platform/tests.git"
+  ],
+  "ForkRepositories": {
+    "dasa.petrezselyova": [
+      "ssh://git@oxfordssh.awsdev.infor.com:7999/DEPM/Platform/forks/dasa.petrezselyova/dashboards.git",
+      "ssh://git@oxfordssh.awsdev.infor.com:7999/DEPM/Platform/forks/dasa.petrezselyova/modeling.git"
+    ],
+    "ivan.rebo": [
+      "ssh://git@oxfordssh.awsdev.infor.com:7999/DEPM/Platform/forks/ivan.rebo/administration.git",
+      "ssh://git@oxfordssh.awsdev.infor.com:7999/DEPM/Platform/forks/ivan.rebo/appengine.git",
+      "ssh://git@oxfordssh.awsdev.infor.com:7999/DEPM/Platform/forks/ivan.rebo/appstudio.git",
+      "ssh://git@oxfordssh.awsdev.infor.com:7999/DEPM/Platform/forks/ivan.rebo/depmservice.git",
+      "ssh://git@oxfordssh.awsdev.infor.com:7999/DEPM/Platform/forks/ivan.rebo/consolidation.git",
+      "ssh://git@oxfordssh.awsdev.infor.com:7999/DEPM/Platform/forks/ivan.rebo/dashboards.git",
+      "ssh://git@oxfordssh.awsdev.infor.com:7999/DEPM/Platform/forks/ivan.rebo/framework.git",
+      "ssh://git@oxfordssh.awsdev.infor.com:7999/DEPM/Platform/forks/ivan.rebo/modeling.git",
+      "ssh://git@oxfordssh.awsdev.infor.com:7999/DEPM/Platform/forks/ivan.rebo/officeinteg.git",
+      "ssh://git@oxfordssh.awsdev.infor.com:7999/DEPM/Platform/forks/ivan.rebo/olap.git",
+      "ssh://git@oxfordssh.awsdev.infor.com:7999/DEPM/Platform/forks/ivan.rebo/repository.git",
+      "ssh://git@oxfordssh.awsdev.infor.com:7999/DEPM/Platform/forks/ivan.rebo/tests.git"
+    ],
+    "oliver.schmidt": [
+      "ssh://git@oxfordssh.awsdev.infor.com:7999/DEPM/Platform/forks/oliver.schmidt/tests.git"
+    ],
+    "petr.novacek": [
+      "ssh://git@oxfordssh.awsdev.infor.com:7999/DEPM/Platform/forks/petr.novacek/administration.git",
+      "ssh://git@oxfordssh.awsdev.infor.com:7999/DEPM/Platform/forks/petr.novacek/administration-ops.git",
+      "ssh://git@oxfordssh.awsdev.infor.com:7999/DEPM/Platform/forks/petr.novacek/central-ops.git",
+      "ssh://git@oxfordssh.awsdev.infor.com:7999/DEPM/Platform/forks/petr.novacek/appengine.git",
+      "ssh://git@oxfordssh.awsdev.infor.com:7999/DEPM/Platform/forks/petr.novacek/appstudio.git",
+      "ssh://git@oxfordssh.awsdev.infor.com:7999/DEPM/Platform/forks/petr.novacek/depmservice.git",
+      "ssh://git@oxfordssh.awsdev.infor.com:7999/DEPM/Platform/forks/petr.novacek/consolidation.git",
+      "ssh://git@oxfordssh.awsdev.infor.com:7999/DEPM/Platform/forks/petr.novacek/dashboards.git",
+      "ssh://git@oxfordssh.awsdev.infor.com:7999/DEPM/Platform/forks/petr.novacek/deployment.git",
+      "ssh://git@oxfordssh.awsdev.infor.com:7999/DEPM/Platform/forks/petr.novacek/framework.git",
+      "ssh://git@oxfordssh.awsdev.infor.com:7999/DEPM/Platform/forks/petr.novacek/framework-ops.git",
+      "ssh://git@oxfordssh.awsdev.infor.com:7999/DEPM/Platform/forks/petr.novacek/modeling.git",
+      "ssh://git@oxfordssh.awsdev.infor.com:7999/DEPM/Platform/forks/petr.novacek/officeinteg.git",
+      "ssh://git@oxfordssh.awsdev.infor.com:7999/DEPM/Platform/forks/petr.novacek/olap.git",
+      "ssh://git@oxfordssh.awsdev.infor.com:7999/DEPM/Platform/forks/petr.novacek/repository.git",
+      "ssh://git@oxfordssh.awsdev.infor.com:7999/DEPM/Platform/forks/petr.novacek/repository-ops.git",
+      "ssh://git@oxfordssh.awsdev.infor.com:7999/DEPM/Platform/forks/petr.novacek/tests.git"
+    ],
+    "stefan.kiel": [
+      "ssh://git@oxfordssh.awsdev.infor.com:7999/DEPM/Platform/forks/stefan.kiel/framework.git",
+      "ssh://git@oxfordssh.awsdev.infor.com:7999/DEPM/Platform/forks/stefan.kiel/olap.git"
+    ],
+    "vit.holy": [
+      "ssh://git@oxfordssh.awsdev.infor.com:7999/DEPM/Platform/forks/vit.holy/appstudio.git",
+      "ssh://git@oxfordssh.awsdev.infor.com:7999/DEPM/Platform/forks/vit.holy/framework.git",
+      "ssh://git@oxfordssh.awsdev.infor.com:7999/DEPM/Platform/forks/vit.holy/ims-integration.git",
+      "ssh://git@oxfordssh.awsdev.infor.com:7999/DEPM/Platform/forks/vit.holy/officeinteg.git",
+      "ssh://git@oxfordssh.awsdev.infor.com:7999/DEPM/Platform/forks/vit.holy/ois-mcp.git"
+    ],
+    "vojtech.lahoda": [
+      "ssh://git@oxfordssh.awsdev.infor.com:7999/DEPM/Platform/forks/vojtech.lahoda/appengine.git",
+      "ssh://git@oxfordssh.awsdev.infor.com:7999/DEPM/Platform/forks/vojtech.lahoda/consolidation.git",
+      "ssh://git@oxfordssh.awsdev.infor.com:7999/DEPM/Platform/forks/vojtech.lahoda/depmservice.git",
+      "ssh://git@oxfordssh.awsdev.infor.com:7999/DEPM/Platform/forks/vojtech.lahoda/framework.git",
+      "ssh://git@oxfordssh.awsdev.infor.com:7999/DEPM/Platform/forks/vojtech.lahoda/modeling.git",
+      "ssh://git@oxfordssh.awsdev.infor.com:7999/DEPM/Platform/forks/vojtech.lahoda/tests.git"
+    ]
+  }
+}

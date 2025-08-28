@@ -10,6 +10,7 @@ public interface IChainConfigurationService
     bool ValidateChainFile(ChainConfiguration chainFile);
     bool ValidateChainFile(ChainConfiguration chainFile, out List<string> errors);
     ChainConfiguration CreateChainForFeature(string jiraId, List<string> projectNames);
+    ChainConfiguration CreateChainForFeature(string jiraId, List<(string ProjectName, bool IsSelected, string Mode, string? Fork, string? Branch, bool UseTests)> projectSelections);
     ChainConfiguration CreateChainForFeature(string jiraId, string? featureName, List<object> projectSelections, string? targetProject = null);
     void RebaseChain(ChainConfiguration chainFile, string newVersion);
     void RebaseChain(ChainConfiguration chainFile, string newVersion, Dictionary<string, string> projectVersions);

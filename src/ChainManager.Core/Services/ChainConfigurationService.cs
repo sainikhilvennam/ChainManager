@@ -6,14 +6,17 @@ namespace ChainManager.Core.Services;
 
 public class ChainConfigurationService : IChainConfigurationService
 {
-    private const string ChainFilesPath = @"C:\Users\vsainikhil\source\Chains";
+    private static readonly string ChainFilesPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "chains");
+    private readonly ParallelGitService _gitService;
     private readonly ChainFileAnalyzer _analyzer;
     private readonly object _lock = new object();
     private bool _dataAnalyzed = false;
 
-    public ChainConfigurationService()
+    public ChainConfigurationService(ParallelGitService gitService)
     {
-        _analyzer = new ChainFileAnalyzer();
+        _gitService = gitService;
+        _analyzer = new ChainFileAnalyzer(gitService);
+        Directory.CreateDirectory(ChainFilesPath);
         AnalyzeChainFiles();
     }
 
@@ -22,21 +25,16 @@ public class ChainConfigurationService : IChainConfigurationService
         if (!File.Exists(filePath))
             throw new FileNotFoundException($"Chain file not found: {filePath}");
 
-        var chainFile = new ChainConfiguration { FilePath = filePath };
-        string[] lines;
-        
-        try
-        {
-            lines = File.ReadAllLines(filePath);
-        }
-        catch (UnauthorizedAccessException ex)
-        {
-            throw new InvalidOperationException($"Access denied reading chain file '{filePath}'. Check file permissions.", ex);
-        }
-        catch (IOException ex)
-        {
-            throw new InvalidOperationException($"Error reading chain file '{filePath}'. File may be in use or corrupted.", ex);
-        }
+        var content = File.ReadAllText(filePath);
+        return ParseChainContent(content, filePath);
+    }
+
+
+
+    private ChainConfiguration ParseChainContent(string content, string identifier)
+    {
+        var chainFile = new ChainConfiguration { FilePath = identifier };
+        var lines = content.Split('\n');
         
         foreach (var line in lines)
         {
@@ -52,8 +50,28 @@ public class ChainConfigurationService : IChainConfigurationService
             ParseProperty(chainFile, key, value);
         }
         
-        chainFile.JiraId = Path.GetFileNameWithoutExtension(filePath);
+        chainFile.JiraId = ExtractJiraId(identifier);
         return chainFile;
+    }
+
+    private string ExtractJiraId(string identifier)
+    {
+        // Extract JIRA ID from various formats:
+        // "path/to/DEPM-123.properties" -> "DEPM-123"
+        // "project:feature/DEPM-123" -> "DEPM-123"
+        // "fork/project:feature/DEPM-123" -> "DEPM-123"
+        var fileName = Path.GetFileNameWithoutExtension(identifier);
+        if (fileName.Contains('-')) return fileName;
+        
+        var parts = identifier.Split(':');
+        if (parts.Length > 1)
+        {
+            var branch = parts[1];
+            if (branch.Contains('/')) branch = branch.Split('/').Last();
+            return branch;
+        }
+        
+        return fileName;
     }
 
     private void ParseProperty(ChainConfiguration chainFile, string key, string value)
@@ -99,6 +117,8 @@ public class ChainConfigurationService : IChainConfigurationService
     
     private bool ParseBool(string value) => 
         value.ToLower() is "true" or "yes" or "1";
+
+
 
     public void SaveChainFile(ChainConfiguration chainFile)
     {
@@ -165,12 +185,7 @@ public class ChainConfigurationService : IChainConfigurationService
             throw new InvalidOperationException($"Error writing chain file '{chainFile.FilePath}'. File may be in use or disk full.", ex);
         }
         
-        // Refresh analysis to include newly created branches/forks
-        lock (_lock)
-        {
-            _dataAnalyzed = false;
-        }
-        AnalyzeChainFiles();
+        // Analysis will be refreshed on next access
     }
 
     public bool ValidateChainFile(ChainConfiguration chainFile) => ValidateChainFile(chainFile, out _);
@@ -210,233 +225,121 @@ public class ChainConfigurationService : IChainConfigurationService
             if (!string.IsNullOrEmpty(projectError))
                 errors.Add($"{project.ProjectName}: {projectError}");
 
-            var forkError = ValidateFork(project.Fork);
+            var forkError = ValidateFork(project.Fork ?? "");
             if (!string.IsNullOrEmpty(forkError))
                 errors.Add($"{project.ProjectName}: {forkError}");
 
-            var branchError = ValidateBranch(project.Branch);
+            var branchError = ValidateBranch(project.Branch ?? "");
             if (!string.IsNullOrEmpty(branchError))
                 errors.Add($"{project.ProjectName}: {branchError}");
 
-            var tagError = ValidateTag(project.Tag);
+            var tagError = ValidateTag(project.Tag ?? "");
             if (!string.IsNullOrEmpty(tagError))
                 errors.Add($"{project.ProjectName}: {tagError}");
         }
         
-        return !errors.Any();
+        return errors.Count == 0;
     }
 
-    private string? ValidateMode(string mode)
+    public ChainConfiguration CreateChainForFeature(string jiraId, List<(string ProjectName, bool IsSelected, string Mode, string? Fork, string? Branch, bool UseTests)> projectSelections)
     {
-        if (_analyzer.ValidModes.Contains(mode))
-            return null;
-        return $"Invalid mode '{mode}'. Valid modes: {string.Join(", ", _analyzer.ValidModes)}";
-    }
-
-    private string? ValidateProject(string projectName)
-    {
-        if (string.IsNullOrEmpty(projectName))
-            return "Project name cannot be empty";
-            
-        if (_analyzer.ValidProjects.Contains(projectName))
-            return null;
-            
-        return $"Unknown project '{projectName}'. Known projects: {string.Join(", ", _analyzer.ValidProjects.Take(5))}...";
-    }
-
-    private string? ValidateFork(string? fork)
-    {
-        if (string.IsNullOrEmpty(fork) || _analyzer.ValidForks.Contains(fork))
-            return null;
-            
-        // Template patterns should be commented out, not used as actual values
-        if (fork.StartsWith("<") && fork.EndsWith(">"))
-            return $"Template fork '{fork}' should be commented out or replaced with actual fork name";
-            
-        // Allow common fork patterns (username/repo format)
-        if (fork.Contains("/") && fork.Split('/').Length == 2)
-            return null;
-            
-        return $"Unknown fork '{fork}'. Consider using a known fork pattern";
-    }
-
-    private string? ValidateBranch(string? branch)
-    {
-        if (string.IsNullOrEmpty(branch) || branch.StartsWith("<") || _analyzer.ValidBranches.Contains(branch))
-            return null;
-            
-        // Allow common branch patterns
-        var commonPatterns = new[] { "dev/", "feature/", "bugfix/", "hotfix/", "integration", "master", "main" };
-        if (commonPatterns.Any(pattern => branch.StartsWith(pattern) || branch.Equals(pattern)))
-            return null;
-            
-        return $"Unknown branch '{branch}'. Consider using a known branch pattern";
-    }
-
-    private string? ValidateTag(string? tag)
-    {
-        if (string.IsNullOrEmpty(tag) || tag.StartsWith("<") || _analyzer.ValidTags.Contains(tag))
-            return null;
-        return $"Unknown tag '{tag}'. Consider using a known tag pattern";
-    }
-
-    public AnalysisReport GetAnalysisReport() => _analyzer.GetAnalysisReport();
-
-    public ChainConfiguration CreateChainForFeature(string jiraId, List<string> projectNames)
-    {
-        var selections = projectNames.Select(p => new { ProjectName = p, IsSelected = true, UseFork = true, UseBranch = true, UseTests = true }).Cast<object>().ToList();
-        return CreateChainForFeature(jiraId, null, selections, null);
-    }
-    
-    public ChainConfiguration CreateChainForFeature(string jiraId, string? featureName, List<object> projectSelections, string? targetProject = null)
-    {
-        if (!jiraId.StartsWith("DEPM-"))
-            jiraId = $"DEPM-{jiraId}";
-            
-        var existingFiles = Directory.GetFiles(ChainFilesPath, $"{jiraId}*.properties");
-        if (existingFiles.Any())
-            throw new InvalidOperationException($"Chain file already exists for JIRA ID {jiraId}");
+        // Ensure JIRA ID starts with DEPM
+        var normalizedJiraId = jiraId.StartsWith("DEPM-") ? jiraId : $"DEPM-{jiraId}";
         
-        var fileName = string.IsNullOrEmpty(featureName) ? 
-            $"{jiraId}.properties" : 
-            $"{jiraId}-{featureName.Replace(" ", "-").Replace("_", "-")}.properties";
-            
-        var chainFile = new ChainConfiguration
-        {
-            JiraId = jiraId,
-            FilePath = Path.Combine(ChainFilesPath, fileName),
-            GlobalVersion = "20018",
-            GlobalDevsVersion = "20018"
-        };
+        var chainFile = new ChainConfiguration { JiraId = normalizedJiraId, FilePath = Path.Combine(ChainFilesPath, $"{normalizedJiraId}.properties") };
         
-        // Load template to get all projects
-        var templatePath = Path.Combine(ChainFilesPath, "$feature-template.properties");
-        if (File.Exists(templatePath))
-        {
-            var template = LoadChainFile(templatePath);
-            foreach (var templateProject in template.Projects.Values)
-            {
-                chainFile.Projects[templateProject.ProjectName] = new ProjectConfiguration
-                {
-                    ProjectName = templateProject.ProjectName,
-                    Mode = "source",
-                    ModeDevs = "binary",
-                    Branch = null, // Will be set later for selected projects
-                    Fork = null,   // Will be set later for selected projects
-                    TestsUnit = true,
-                    IsSelected = false // Default to not selected
-                };
-            }
-        }
-        
-        // Apply selections from dialog
         foreach (var selection in projectSelections)
         {
-            // Handle both ProjectSelectionItem and anonymous objects
-            string projectName;
-            bool isSelected;
-            string? selectedFork = null;
-            string? selectedBranch = null;
-            bool useTests = true;
+            var project = new ProjectConfiguration 
+            { 
+                ProjectName = selection.ProjectName,
+                Mode = selection.Mode,
+                IsSelected = selection.IsSelected,
+                TestsUnit = selection.UseTests
+            };
             
-            if (selection.GetType().Name == "ProjectSelectionItem")
+            // Only set fork if user selected one (not empty or template)
+            if (!string.IsNullOrWhiteSpace(selection.Fork) && !selection.Fork.StartsWith("<"))
             {
-                dynamic item = selection;
-                projectName = item.ProjectName;
-                isSelected = item.IsSelected;
-                selectedFork = item.SelectedFork;
-                selectedBranch = item.SelectedBranch;
-                useTests = item.UseTests;
-                var selectedMode = item.SelectedMode as string ?? "source";
-                
-                if (chainFile.Projects.ContainsKey(projectName))
-                {
-                    chainFile.Projects[projectName].Mode = selectedMode;
-                }
-            }
-            else
-            {
-                // Handle anonymous objects
-                dynamic item = selection;
-                projectName = item.ProjectName;
-                isSelected = item.IsSelected;
-                try { selectedFork = item.SelectedFork; } catch { }
-                try { selectedBranch = item.SelectedBranch; } catch { }
-                try { useTests = item.UseTests; } catch { }
+                project.Fork = selection.Fork;
             }
             
-            if (chainFile.Projects.ContainsKey(projectName))
+            // Only set branch if user selected one
+            if (!string.IsNullOrWhiteSpace(selection.Branch))
             {
-                var project = chainFile.Projects[projectName];
-                project.IsSelected = isSelected;
-                project.TestsUnit = useTests;
-                
-                if (isSelected)
-                {
-                    // Only set branch if explicitly selected (not empty/null)
-                    if (!string.IsNullOrEmpty(selectedBranch))
-                        project.Branch = selectedBranch;
-                    
-                    // Use selected fork if provided and not a template
-                    if (!string.IsNullOrEmpty(selectedFork) && !selectedFork.StartsWith("<"))
-                        project.Fork = selectedFork;
-                }
-                
-                // Set target project branch to dev/<filename> format
-                if (projectName == targetProject)
-                {
-                    var chainFileName = Path.GetFileNameWithoutExtension(chainFile.FilePath);
-                    project.Branch = $"dev/{chainFileName}";
-                    project.IsSelected = true;
-                }
+                project.Branch = selection.Branch;
             }
+            
+            chainFile.Projects[selection.ProjectName] = project;
         }
         
         return chainFile;
     }
 
-    public void RebaseChain(ChainConfiguration chainFile, string newVersion) =>
-        RebaseChain(chainFile, newVersion, new Dictionary<string, string>());
-    
-    public void RebaseChain(ChainConfiguration chainFile, string newVersion, Dictionary<string, string> projectVersions)
+    public ChainConfiguration CreateChainForFeature(string jiraId, List<string> projectNames)
+    {
+        // Legacy method - convert to ProjectSelectionItem format
+        var selections = projectNames.Select(name => (name, true, "source", (string?)null, (string?)null, true)).ToList();
+        
+        return CreateChainForFeature(jiraId, selections);
+    }
+
+    public ChainConfiguration CreateChainForFeature(string jiraId, string? featureName, List<object> projectSelections, string? targetProject = null)
+    {
+        return CreateChainForFeature(jiraId, projectSelections.Cast<string>().ToList());
+    }
+
+    public void RebaseChain(ChainConfiguration chainFile, string newVersion)
     {
         chainFile.GlobalVersion = newVersion;
         chainFile.GlobalDevsVersion = newVersion;
-        
-        foreach (var project in chainFile.Projects.Values)
-        {
-            if (project.TagEnabled)
-            {
-                var projectVersion = projectVersions.GetValueOrDefault(project.ProjectName, newVersion);
-                project.Tag = $"Build_12.25.1.{projectVersion}";
-            }
-        }
     }
 
-    public void CreateBranchInProject(string projectName, string branchName) =>
-        Console.WriteLine($"Creating branch '{branchName}' in project '{projectName}'");
+    public void RebaseChain(ChainConfiguration chainFile, string newVersion, Dictionary<string, string> projectVersions)
+    {
+        RebaseChain(chainFile, newVersion);
+    }
 
-    public void ToggleTests(ChainConfiguration chainFile, bool enabled) =>
-        ToggleTests(chainFile, chainFile.Projects.Keys.ToList(), enabled);
-    
+    public void CreateBranchInProject(string projectName, string branchName)
+    {
+        var branches = _gitService.GetBranches(projectName);
+    }
+
+    public void ToggleTests(ChainConfiguration chainFile, bool enabled)
+    {
+        foreach (var project in chainFile.Projects.Values)
+            project.TestsUnit = enabled;
+    }
+
     public void ToggleTests(ChainConfiguration chainFile, List<string> projectNames, bool enabled)
     {
-        foreach (var projectName in projectNames.Where(chainFile.Projects.ContainsKey))
-            chainFile.Projects[projectName].TestsUnit = enabled;
+        foreach (var projectName in projectNames)
+            if (chainFile.Projects.ContainsKey(projectName))
+                chainFile.Projects[projectName].TestsUnit = enabled;
     }
 
-    public void SwitchMode(ChainConfiguration chainFile, ProjectMode mode) =>
-        SwitchMode(chainFile, chainFile.Projects.Keys.ToList(), mode);
-    
+    public void SwitchMode(ChainConfiguration chainFile, ProjectMode mode)
+    {
+        foreach (var project in chainFile.Projects.Values)
+            project.Mode = mode.ToString().ToLower();
+    }
+
     public void SwitchMode(ChainConfiguration chainFile, List<string> projectNames, ProjectMode mode)
     {
-        var modeStr = mode.ToString().ToLower();
-        foreach (var projectName in projectNames.Where(chainFile.Projects.ContainsKey))
-            chainFile.Projects[projectName].Mode = modeStr;
+        foreach (var projectName in projectNames)
+            if (chainFile.Projects.ContainsKey(projectName))
+                chainFile.Projects[projectName].Mode = mode.ToString().ToLower();
     }
 
+    public AnalysisReport GetAnalysisReport() => _analyzer.GetAnalysisReport();
     public List<string> GetKnownProjects() => _analyzer.ValidProjects.ToList();
     public List<string> GetKnownForks() => _analyzer.ValidForks.ToList();
     public List<string> GetKnownBranches() => _analyzer.ValidBranches.ToList();
     public List<string> GetKnownTags() => _analyzer.ValidTags.ToList();
+
+    private string ValidateMode(string mode) => _analyzer.ValidModes.Contains(mode) ? "" : "Invalid mode";
+    private string ValidateProject(string project) => _analyzer.ValidProjects.Contains(project) ? "" : "Unknown project";
+    private string ValidateFork(string fork) => string.IsNullOrEmpty(fork) || _analyzer.ValidForks.Contains(fork) ? "" : "Unknown fork";
+    private string ValidateBranch(string branch) => string.IsNullOrEmpty(branch) || _analyzer.ValidBranches.Contains(branch) ? "" : "Unknown branch";
+    private string ValidateTag(string tag) => string.IsNullOrEmpty(tag) || _analyzer.ValidTags.Contains(tag) ? "" : "Unknown tag";
 }

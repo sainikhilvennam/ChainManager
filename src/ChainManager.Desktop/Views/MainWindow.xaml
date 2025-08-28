@@ -18,12 +18,17 @@
         
         <!-- Toolbar -->
         <ToolBar Grid.Row="0" ToolBarTray.IsLocked="True">
+            <Label Content="Git:" FontWeight="Bold" Foreground="DarkBlue"/>
+            <Button Content="Clone Repos" Command="{Binding CloneRepositoriesCommand}" Background="LightBlue"/>
+            <Button Content="Update Repos" Command="{Binding UpdateRepositoriesCommand}" Background="LightGreen"/>
+            <Button Content="Show Git Data" Command="{Binding ShowGitDataCommand}" Background="LightYellow"/>
+            <Separator/>
+            <Label Content="Chain:" FontWeight="Bold" Foreground="DarkGreen"/>
             <Button Content="Load Chain" Command="{Binding LoadChainCommand}"/>
             <Button Content="Validate" Command="{Binding ValidateChainCommand}"/>
             <Button Content="Create Feature" Command="{Binding CreateFeatureCommand}"/>
             <Button Content="Rebase" Command="{Binding RebaseChainCommand}"/>
             <Button Content="Save" Command="{Binding SaveChainCommand}"/>
-
         </ToolBar>
         
         <!-- Main Content -->
