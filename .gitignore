@@ -2,6 +2,7 @@
 .vs/
 *.user
 *.suo
+<<<<<<< HEAD
 
 # Build results
 [Dd]ebug/
@@ -221,3 +222,5 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+=======
+>>>>>>> 15d40c47f92fce16a4ca37436cd19512f18f17d6
